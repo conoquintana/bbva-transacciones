@@ -9,6 +9,18 @@ import re
 
 app = FastAPI()
 
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi import Request
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/", response_class=HTMLResponse)
+async def upload_form(request: Request):
+    return templates.TemplateResponse("form.html", {"request": request})
+
+
 def extract_transactions_from_pdf(pdf_path):
     doc = fitz.open(pdf_path)
     transactions = []
