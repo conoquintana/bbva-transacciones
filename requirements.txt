@@ -2,3 +2,4 @@ fastapi
 uvicorn
 pymupdf
 pandas
+python-multipart
