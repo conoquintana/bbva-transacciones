@@ -2,16 +2,13 @@ import os
 import tempfile
 import fitz  # PyMuPDF
 import pandas as pd
-from fastapi import FastAPI, File, UploadFile
-from fastapi.responses import JSONResponse
-from typing import List
+from fastapi import FastAPI, File, UploadFile, Request
+from fastapi.responses import HTMLResponse, JSONResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 import re
 
 app = FastAPI()
-
-from fastapi.responses import HTMLResponse
-from fastapi.templating import Jinja2Templates
-from fastapi import Request
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
